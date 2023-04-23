@@ -16,3 +16,15 @@ export async function getAllItems (req, res) {
   res.send(itemsClean)
 }
 
+export async function deleteItem(req,res) {
+  const { id } = req.params
+  await coll.doc(id).delete()
+  getAllItems(req, res)
+}
+
+export async function updateItem(req, res) {
+  const { id } = req.params 
+  const updateInfo = req.body 
+  await coll.doc(id).update(updateInfo)
+  getAllItems(req, res)
+}
